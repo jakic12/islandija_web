@@ -1,63 +1,103 @@
 var originalHeight = document.getElementById("titleDiv").clientHeight
 
 var snapPoints = [
-    { sc: 0, id: "titleDiv" },
-    { sc: 475, id: "opis_splitter" },
-    { sc: 0, id: "opis1_splitter"}
+    { sc:0, id: "titleDiv" },
+    { id: "opis_splitter" },
+    { id: "opis1_splitter"}
 ];
 
-var currentPage = 0;
 
-window.onload = function(){
-    scrollToPoint(snapPoints[0].id);
-    window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
+var currentPage = 0;
+var endOfMainScreen = 0;
+
+var scrolling = false;
+
+function resetAllPoints(){
+    endOfMainScreen = document.getElementById(snapPoints[1].id).offsetTop;
+    endOfMainScreen /= 2;//main is shrinking 2x speed bcz parallax
+
+    snapPoints.forEach(function(element,i){
+        snapPoints[i].sc = document.getElementById(element.id).offsetTop;
+        if(i != 0){
+            snapPoints[i].sc -= endOfMainScreen-10;
+        }
     });
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(() => {
+        document.body.scrollTop = 0;
+    }, 100);
+    if (document.body.scrollTop == 0) {
+        resetAllPoints();
+    }
+}, false);
+
 window.onwheel = function(event){
-    //var direction = (event.deltaY > 0)? 1:-1;
-    if (event.deltaY > 0){
-        currentPage++;
-    }else{
-        currentPage--;
+    if (!scrolling) {
+        if (event.deltaY > 0){
+            currentPage++;
+        }else{
+            currentPage--;
+        }
+
+        if (currentPage < snapPoints.length && currentPage >= 0){
+                scrollToPoint(snapPoints[currentPage].sc);
+        } else if (currentPage < 0){
+            currentPage = 0;
+        }else{
+            currentPage = snapPoints.length-1;
+        }
     }
-
-    if (currentPage < snapPoints.length && currentPage >= 0){
-        scrollToPoint(snapPoints[currentPage].id);
-        console.log("scrolled to", snapPoints[currentPage].id, document.getElementById(snapPoints[currentPage].id).getBoundingClientRect().top);
-    } else if (currentPage < 0){
-        currentPage = 0;
-    }else{
-        currentPage = snapPoints.length-1;
-    }
-
-    console.log(currentPage);
-    console.log(snapPoints[currentPage].id);
-
     event.preventDefault();
 }
 
+
+var timeout = null
 window.onscroll = function(event){
-    if (document.body.scrollTop < 475){//parallax main
-        /*document.getElementById("titleDiv").style.height = originalHeight - document.body.scrollTop + "px";
-        document.getElementById("sky").style = "transform:translate(0,-" + document.body.scrollTop/3 + "px);";*/
+    scrolling = true;
+
+    if (document.body.scrollTop == 0) {
+        resetAllPoints();
     }
+
+    if(timeout != null){
+        clearTimeout(timeout);
+    }
+
+    if (document.body.scrollTop < endOfMainScreen){//parallax main
+        document.getElementById("titleDiv").style.height = originalHeight - document.body.scrollTop + "px";
+        document.getElementById("sky").style = "transform:translate(0,-" + document.body.scrollTop/3 + "px);";
+    }
+
+    timeout = setTimeout(()=>{//on scrolling stopped
+        scrolling = false;
+        console.log("stopped");
+        onscrollchange();
+    },100)
 }
 
-var scrollToPoint = function(id){
-    window.scroll({
-        top: document.body.scrollTop + document.getElementById(id).getBoundingClientRect().top,
+var scrollToPoint = function (amount){
+    window.scrollTo({
+        top: amount,
         left: 0,
         behavior: 'smooth'
     });
-
-    //document.getElementById(id).scrollIntoView();
 }
 
+
 var onscrollchange = function(){
+    if (currentPage >= 1){
+        document.getElementById("satellite").style.marginLeft = "0px";
+
+    }else{
+        document.getElementById("satellite").style.transitionProperty = "none";
+        document.getElementById("satellite").style.marginLeft = "100%";
+        setTimeout(function(){
+            document.getElementById("satellite").style.transitionProperty = "margin";
+        }, 100);
+    }
     console.log(currentPage, "finished scrolling")
 }
 
