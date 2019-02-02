@@ -84,10 +84,15 @@ hr{
     height: -webkit-calc(100vh - 100px);
     height: calc(100vh - 100px);
     display:block;
+    position:relative;
 }
 
 .sub-content{
     padding:50px;
+}
+
+.sub-content p{
+    margin:10px 0;
 }
 
 .left-container{
@@ -113,10 +118,18 @@ hr{
     height:100%;
 }
 
+.top-container{
+    height:50%;
+    
+}
+
+.bottom-container{
+    height:50%;
+
+}
 /*content*/
 
 /*opis*/
-
 #satellite{
     width:100%;
     margin-left:100%;
@@ -125,9 +138,35 @@ hr{
 }
 /*opis*/
 
-#opis-img1{
-    height:calc(100vh - 100px);
+/*zgo*/
+.timeline{
+    position:relative;
+    width:90%;
+    height:100px;
+    background-color:#2e2430;
+    margin:0 auto;
+    overflow-x:hidden;
 }
+
+.tl_point{
+    position:absolute;
+    width:2px;
+    height:100%;
+    background-color:#e5d811;
+}
+
+#zgo_tl{
+}
+
+#zgo_tl_container{
+    position:absolute;
+    bottom:50px;
+    height:100px;
+    width:100%;
+}
+
+/*zgo*/
+
 
 
 /*content*/
