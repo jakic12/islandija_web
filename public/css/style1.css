@@ -96,15 +96,25 @@ hr{
 }
 
 .left-container{
-    padding:20px;
     width:calc(100%/2);
     float:left;
     box-sizing: border-box;
+    overflow:hidden;
+    height:100%;
+}
+
+.left-right-content{
+    padding:20px;
     font-size:20px;
+}
+
+.left-right-img img{
+    height:100%;
+    position:relative;
     overflow:hidden;
 }
 
-.left-container img{
+.left-container {
     height:100%;
 }
 
@@ -114,17 +124,16 @@ hr{
     box-sizing: border-box;
     overflow:hidden;
 }
-.right-container img{
-    height:100%;
-}
 
 .top-container{
-    height:50%;
+    height:calc(100vh - 210px);
+    overflow:hidden;
     
 }
 
 .bottom-container{
-    height:50%;
+    height:110px;
+    overflow:hidden;
 
 }
 /*content*/
@@ -142,7 +151,7 @@ hr{
 .timeline{
     position:relative;
     width:90%;
-    height:100px;
+    height:50px;
     background-color:#2e2430;
     margin:0 auto;
     overflow-x:hidden;
@@ -153,6 +162,26 @@ hr{
     width:2px;
     height:100%;
     background-color:#e5d811;
+    left:-2;
+    transition-property:left, background, width;
+    transition-duration: 1s;
+}
+
+.tl_point_selected{
+    background-color:#d5775b;
+    width:10px;
+    z-index:100;
+}
+
+#tl_yearIndicator{
+    position:absolute;
+    box-sizing: border-box;
+    color:black;
+    background-color:#d5775b;
+    padding:10px;
+    height:44px;
+    transition-duration: 1s;
+    transition-property: left;
 }
 
 #zgo_tl{
@@ -160,8 +189,8 @@ hr{
 
 #zgo_tl_container{
     position:absolute;
-    bottom:50px;
-    height:100px;
+    bottom:0px;
+    height:80px;
     width:100%;
 }
 
