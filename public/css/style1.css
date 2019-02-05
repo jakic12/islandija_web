@@ -15,6 +15,62 @@ body,html{
 
 }
 
+#loading-image-container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100px;
+    height:100px;
+}  
+#loading-image-container img{
+    width:100px;
+    height:100px;
+}
+
+.loading-circle-ac{
+    animation-name: spin-ac;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+@keyframes spin-ac {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.loading-screen-v{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:#1b151c;
+    z-index:1000;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+}
+
+.loading-screen-iv{
+    opacity: 0;
+}
+
 /* titlediv*/
 #titleDiv{
     height:100%;
@@ -185,6 +241,7 @@ hr{
 }
 
 #zgo_tl{
+    
 }
 
 #zgo_tl_container{

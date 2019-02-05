@@ -1,5 +1,4 @@
-var originalHeight = document.getElementById("titleDiv").clientHeight
-
+var originalHeight;
 var snapPoints = [
     { sc:0, id: "titleDiv" },
     { id: "opis_splitter" },
@@ -47,15 +46,9 @@ function resetAllPoints(){
     });
 }
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(() => {
-        document.body.scrollTop = 0;
-    }, 100);
-    if (document.body.scrollTop == 0) {
-        resetAllPoints();
-    }
-}, false);
+/*document.addEventListener('DOMContentLoaded', function () {
+    
+}, false);*/
 
 window.onwheel = function(event){
     if (!scrolling) {
@@ -113,8 +106,39 @@ var timelineloaded = false;
 
 var timelineInterval;
 
+window.onload = function(){
+    document.getElementById("main-content").style.display = "initial";
+    //document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("loading-screen").className += " loading-screen-iv";
+
+    originalHeight = document.getElementById("titleDiv").clientHeight;
+
+
+    console.log("finished loading");
+    
+    setTimeout(() => {
+        document.body.scrollTop = 0;
+    }, 100);
+    if (document.body.scrollTop == 0) {
+        resetAllPoints();
+    }
+}
+
 
 var onscrollchange = function(){
+
+    if (!scrolling){
+        let min = Math.abs(document.body.scrollTop - snapPoints[0].sc);
+        let indexmin = 0;
+        snapPoints.forEach(function(element,i){
+            if (Math.abs(document.body.scrollTop - element.sc) < min){
+                min = Math.abs(document.body.scrollTop - element.sc);
+                indexmin = i;
+            }
+        });
+        currentPage = indexmin;
+    }
+
     /*opis*/
     if (currentPage >= 1){
         document.getElementById("satellite").style.marginLeft = "0px";
