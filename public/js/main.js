@@ -25,9 +25,10 @@ var snapPoints = [
             { x:2010, text: "Volcanic Eruption at the Eyjafjallajökull. This same year Jón Gnarr, a known actor and comedian in Iceland, became mayor of Reykjavik (2010-2014)." },
             { x:2015, text: "Residents in Iceland number 329.100. Icelandic citizens 296,700." }
         ]
-    }}
+    }},
+    { id: "atr_splitter"}
 ];
-
+//api_key = AIzaSyC3FOUHZgVAGK9QnL2RLq1oStFU8xcjU44
 
 var currentPage = 0;
 var endOfMainScreen = 0;
@@ -45,6 +46,8 @@ function resetAllPoints(){
         }
     });
 }
+
+loadAttractions();
 
 /*document.addEventListener('DOMContentLoaded', function () {
     
@@ -110,6 +113,9 @@ window.onload = function(){
     document.getElementById("main-content").style.display = "initial";
     //document.getElementById("loading-screen").style.display = "none";
     document.getElementById("loading-screen").className += " loading-screen-iv";
+    setTimeout(function(){
+        document.getElementById("loading-screen").style.display = "none";
+    },1000);
 
     originalHeight = document.getElementById("titleDiv").clientHeight;
 
@@ -218,7 +224,7 @@ var onscrollchange = function(){
             loadTimeline();
             if (!timelineInterval){
                 console.log("interval attached");
-                timelineInterval = setInterval(() => changeSelected(), 5000);
+                timelineInterval = setInterval(() => changeSelected(), 3000);
             }
         }
     }else{
@@ -228,6 +234,113 @@ var onscrollchange = function(){
     }
     /*zgo*/ 
 
+    /*atr*/
+    var initialMousePos;
+    var initialScrollPos;
+    function handlescroll(evt){
+        initialMousePos = evt.clientX;
+        initialScrollPos = document.getElementById("results_container").scrollLeft;
+        document.getElementById("results_container").addEventListener('mousemove', moveScroll);
+    }
+
+    function moveScroll(evt){
+        document.getElementById("results_container").scrollLeft = (initialScrollPos + (initialMousePos - evt.clientX));
+    }
+
+    function removeMoveScroll(){
+        document.getElementById("results_container").removeEventListener('mousemove', moveScroll);
+    }
+
+    if(currentPage== 3){
+        document.getElementById("results_container").addEventListener('mousedown', handlescroll);
+        document.getElementById("results_container").addEventListener('mouseup', removeMoveScroll);
+    }else{
+        document.getElementById("results_container").removeEventListener('mousedown', handlescroll);
+        document.getElementById("results_container").removeEventListener('mousemove', moveScroll);
+    }
+
+    /*atr*/
+
     console.log(currentPage, "finished scrolling");
+}
+
+function loadAttractions() {
+    var iceland = new google.maps.LatLng(64.796776, -23.7276555);
+    var request = {
+        location: iceland,
+        query: 'iceland attractions',
+        radius: '10000'
+    };
+    var service = new google.maps.places.PlacesService(document.getElementById("results"));
+    service.textSearch(request, function (results, status) {
+        console.log(results);
+        results.sort(function (a, b) {
+            return b.rating - a.rating;
+        });
+        for (let i in results) {
+            console.log(results[i]);
+
+            var requestDetail = {
+                placeId: results[i].place_id
+            };
+
+            //console.log(results[i].name, results[i].rating, results[i].photos[0].getUrl());
+            document.getElementById("results").innerHTML +=
+                `<div class="attraction">
+                    <div class="left-container left-right-img">
+                        <div class="atr_thumbnail">
+                            <a id="${results[i].place_id}_img" href=""><img src="${results[i].photos[0].getUrl()}"></a>
+                        </div>
+                    </div>
+                    <div class="right-container left-right-content" style="height:100%; overflow-y:auto">
+                        <div class="sub-title">
+                            <h1>${results[i].name}</h1>
+                        </div>
+                        <hr>
+                        <div class="sub-content" style="padding:10px">
+                            <div>
+                                <div class="rating">
+                                    <div class="fa stars-outer">
+                                        <div class="fa stars-inner" style="width:${results[i].rating * 20}%">
+                                        </div>
+                                    </div>
+                                    <span>${results[i].rating}</span>
+                                </div>
+                                <div id="google_reviews_${results[i].place_id}" class="reviews">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+            service.getDetails(requestDetail, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    console.log("request details:", place);
+
+                    document.getElementById(`${results[i].place_id}_img`).href = place.url;
+
+                    for (let reviewI in place.reviews) {
+                        document.getElementById('google_reviews_' + results[i].place_id).innerHTML +=
+
+                            `<div class="review">
+                                <p>${place.reviews[reviewI].text}</p>
+                            </div>`;
+                    }
+
+                }
+            });
+        }
+    });
+
+
+    /*fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=iceland%20point%20of%20interest&language=en&radius=2000&key=AIzaSyC3FOUHZgVAGK9QnL2RLq1oStFU8xcjU44")
+        .then((data) => data.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })*/
 }
 

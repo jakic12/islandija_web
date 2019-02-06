@@ -65,6 +65,7 @@ body,html{
     -moz-transition: opacity 1s ease-in-out;
     -ms-transition: opacity 1s ease-in-out;
     -o-transition: opacity 1s ease-in-out;
+    cursor: wait;
 }
 
 .loading-screen-iv{
@@ -253,6 +254,86 @@ hr{
 
 /*zgo*/
 
+/*atr*/
+#results_container{
+    overflow:hidden;
+    overflow-x:auto;
+    white-space:nowrap;
+    position:relative;
+    padding-bottom:0px;
+    height:calc(100% - 108px);
+    cursor: -webkit-grab; cursor: grab;
+}
+
+#results{
+    padding:10px;
+}
+
+.attraction{
+    height: calc(100vh - 250px);
+    width: calc(50vw);
+    display:inline-block;
+    background:#2e2430;
+    margin:10px;
+    overflow:hidden;
+}
+
+.attraction img{
+    height:calc(100vh - 250px);
+}
+
+.atr_thumbnail{
+    height:200px;
+}
+
+.atr_name{
+    color:black;
+}
+
+/*reviews*/
+    .stars-outer {
+        display: inline-block;
+        position: relative;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+    }
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .stars-outer::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 400;
+        content: "\f005 \f005 \f005 \f005 \f005";
+    }
+
+    .stars-inner::before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f005 \f005 \f005 \f005 \f005";
+      color: #f8ce0b;
+    }
+
+    .rating{
+        height:100px;
+        line-height:100px;
+    }
+    .review{
+        width:100%;
+        background-color:#1b151c;
+        display:block;
+        white-space:normal;
+        margin-bottom:10px;
+        padding:10px;
+    }
+/*reviews*/
+
+/*atr*/
 
 
 /*content*/
