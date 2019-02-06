@@ -306,6 +306,7 @@ function loadAttractions() {
                                     </div>
                                     <span>${results[i].rating}</span>
                                 </div>
+                                <p>reviews:</p>
                                 <div id="google_reviews_${results[i].place_id}" class="reviews">
 
                                 </div>
@@ -324,6 +325,14 @@ function loadAttractions() {
                         document.getElementById('google_reviews_' + results[i].place_id).innerHTML +=
 
                             `<div class="review">
+                                <p class="timestamp">${place.reviews[reviewI].author_name} - ${place.reviews[reviewI].relative_time_description}</p>
+
+                                <div class="fa stars-outer">
+                                    <div class="fa stars-inner-review" style="width:${place.reviews[reviewI].rating*20}%;">
+                                    </div>
+                                </div>
+                                ${place.reviews[reviewI].rating}
+
                                 <p>${place.reviews[reviewI].text}</p>
                             </div>`;
                     }

@@ -306,6 +306,15 @@ hr{
         width: 0;
     }
 
+    .stars-inner-review{
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
     .stars-outer::before {
         font-family: "Font Awesome 5 Free";
         font-weight: 400;
@@ -317,6 +326,13 @@ hr{
       font-weight: 900;
       content: "\f005 \f005 \f005 \f005 \f005";
       color: #f8ce0b;
+    }
+
+    .stars-inner-review::before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f005 \f005 \f005 \f005 \f005";
+      color: #becfe2;
     }
 
     .rating{
@@ -332,6 +348,10 @@ hr{
         padding:10px;
     }
 /*reviews*/
+
+.timestamp{
+    color:grey;
+}
 
 /*atr*/
 
