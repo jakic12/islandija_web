@@ -4,31 +4,30 @@ var snapPoints = [
     { id: "opis_splitter" },
     { id: "zgo_splitter", data:{
         zgo:[
-            { x:860, text: "Norsemen discover Iceland." },
-            { x:999, text: "Christianity adopted in Iceland." },
-            { x:1000, text: "Leifur Eiríksson discovers what is now known as North America." },
-            { x:1120, text: "Most of the Icelandic Sagas—tales of family feuds and heroics—are written." },
-            { x:1402, text: "The Black Plague infects Iceland. Over 33% of the population is wiped out." },
-            { x:1584, text: "The Bible is translated into Icelandic." },
-            { x:1707, text: "Bubonic plague; one third of the population dies." },
-            { x:1783, text: "Volcanic activity destroys Icelandic farmland and leads to widespread starvation." },
-            { x:1915, text: "Women receive the vote." },
-            { x:1940, text: "Iceland is occupied by British troops." },
-            { x:1941, text: "US-Icelandic defence agreement signed; US troops stay in Iceland for duration of WWII." },
-            { x:1944, text: "The Republic of Iceland is formally established." },
-            { x:1949, text: "Iceland becomes a founding member of NATO." },
-            { x:1958, text: "Dispute over fishing limits, first ‘cod war’ with Britain." },
-            { x:1970, text: "Two further ‘cod wars’ with Britain (and West Germany)." },
-            { x:1980, text: "Vigdís Finnbogadóttir elected president, the first democratically-elected female head of state." },
-            { x:1994, text: "Iceland joins the European Economic Area, an economic arrangement with the EU." },
-            { x:2008, text: "Economic crisis, near total collapse of Iceland’s banking system." },
-            { x:2010, text: "Volcanic Eruption at the Eyjafjallajökull. This same year Jón Gnarr, a known actor and comedian in Iceland, became mayor of Reykjavik (2010-2014)." },
-            { x:2015, text: "Residents in Iceland number 329.100. Icelandic citizens 296,700." }
+            { x:860, text: "Norvežani najdejo Islandijo." },
+            { x:999, text: "Na Islandiji je bilo sprejeto krščanstvo." },
+            { x:1000, text: "Leifur Eiríksson odkriva, kaj je zdaj znano kot Severna Amerika." },
+            { x:1120, text: "Večina islandskih sag - pripovedi o družinskih sporih in herojstvu - je napisanih." },
+            { x:1402, text: "Črna kuga okuži Islandijo. Več kot 33% prebivalstva je uničenih." },
+            { x:1584, text: "Sveto pismo je prevedeno v islandščino." },
+            { x:1707, text: "Črna smrt; umre ena tretjina prebivalstva." },
+            { x:1783, text: "Vulkanska dejavnost uničuje islandske kmetijske površine in vodi k širokemu stradanju." },
+            { x:1915, text: "Ženske imajo pravico do glasovanja." },
+            { x:1940, text: "Islandijo zasedejo britanske enote." },
+            { x:1941, text: "Podpisan sporazum med ZDA in Islandijo o obrambi; Ameriške čete ostanejo na Islandiji med drugo svetovno vojno." },
+            { x:1944, text: "Republika Islandija je uradno ustanovljena." },
+            { x:1949, text: "Islandija postane ustanovna članica Nata." },
+            { x:1958, text: "Spor glede omejitev ribolova, „cod war“ z Britanijo." },
+            { x:1970, text: "Dve nadaljnji vojni z Britanijo (in Zahodno Nemčijo)." },
+            { x:1980, text: "Vigdís Finnbogadóttir je bila izvoljena za predsednika,velja kot prva demokratično izvoljenega predsednica države." },
+            { x:1994, text: "Islandija se pridruži Evropskemu gospodarskemu prostoru." },
+            { x:2008, text: "Gospodarska kriza, skoraj popoln propad islandskega bančnega sistema." },
+            { x:2010, text: "Vulkanski izbruh pri Eyjafjallajökull. Istega leta je Jón Gnarr, znan igralec in komik na Islandiji, postal župan Reykjavika (2010–2014)." },
+            { x:2015, text: "" }
         ]
     }},
     { id: "atr_splitter"}
 ];
-//api_key = AIzaSyC3FOUHZgVAGK9QnL2RLq1oStFU8xcjU44
 
 var currentPage = 0;
 var endOfMainScreen = 0;
@@ -306,7 +305,7 @@ function loadAttractions() {
                                     </div>
                                     <span>${results[i].rating}</span>
                                 </div>
-                                <p>reviews:</p>
+                                <p>mnenja:</p>
                                 <div id="google_reviews_${results[i].place_id}" class="reviews">
 
                                 </div>
